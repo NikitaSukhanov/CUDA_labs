@@ -48,7 +48,7 @@ void transpose(size_t n, const float* a, float* a_t)
     }
 }
 
-void multiply_simple(size_t n, const float* a, const float* b, float* c)
+void multiply_by_def(size_t n, const float* a, const float* b, float* c)
 {
     size_t i, j, k;
     for (i = 0; i < n; i++)
@@ -63,6 +63,27 @@ void multiply_simple(size_t n, const float* a, const float* b, float* c)
         }
     }
 }
+
+void multiply_by_transpose(size_t n, const float* a, const float* b, float* c)
+{
+    size_t i, j, k;
+    float* b_t = new float[n * n];
+    transpose(n, b, b_t);
+
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            c[i * n + j] = 0.0f;
+            for (k = 0; k < n; k++)
+            {
+                c[i * n + j] += a[i * n + k] * b_t[j * n + k];
+            }
+        }
+    }
+    delete[] b_t;
+}
+
 
 float deviation_norm(size_t n, const float* a, const float* b)
 {
