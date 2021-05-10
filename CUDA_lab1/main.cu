@@ -113,7 +113,7 @@ double time_profile(multiplicator f, size_t n, const float* a, const float* b, f
 void deviation_check(size_t n, const float* a, const float* b)
 {
     float deviation = deviation_norm(n, a, b);
-    if (deviation > -1e-2)
+    if (deviation > 1e-2)
     {
         cout << " large deviation: " << deviation << " ";
     }
